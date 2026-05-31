@@ -1,99 +1,28 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './componets/Layout/Layout';
-import { NotFound } from './componets/NotFound/NotFound';
-import Login from './componets/Login/Login';
-import Register from './componets/Register/Register';
-import { Hero } from './componets/hero/Hero';
-import Products from './componets/Products/Products';
-import { Men } from './componets/Men/Men';
-import Women from './componets/Women/Women';
-import Categories from './componets/Categories/Categories';
-import Clothes from './componets/Clothes/Clothes';
-import Electronics from './componets/Electronics/Electronics';
-import SmartAccessories from './componets/SmartAccessories/SmartAccessories';
-import Laptop from './componets/Laptop/Laptop';
-import Mobile from './componets/Mobile/Mobile';
+import Layout from './components/Layout/Layout';
+import { NotFound } from './components/NotFound/NotFound';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Products from './components/Products/Products';
 import UserContextProvider from './Context/userContext';
-import { Gallery } from './componets/gallery/Gallery';
-import RoutingGuards from './componets/RoutingGuards/RoutingGuards';
-import ProductDetails from './componets/ProductDetails/ProductDetails';
+import CartContextProvider from './Context/cartContext';
+import RoutingGuards from './components/RoutingGuards/RoutingGuards';
+import ProductDetails from './components/ProductDetails/ProductDetails';
+import Cart from './components/Cart/Cart';
+import { Home } from './components/Home/Home';
 
 
 function App() {
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "", element: <Layout />, children: [
-  //       { path: "", element: <Hero /> },
-  //       { path: "home", element: <Home /> },
-  //       { path: "about", element: <About /> },
-  //       { path: "gallery", element: <Gallery /> },
-  //       { path: "services", element: <Services /> },
-  //       { path: "contact", element: <Contact /> },
-  //       { path: "login", element: <Login /> },
-  //       { path: "register", element: <Register /> }
-  //     ]
-  //   },
-  //   {
-  //     path: "*",
-  //     element: <NotFound />
-  //   }
-  // ]);
-
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "", element: <Layout />, children: [
-  //       { path: "", element: <Hero /> }, 
-  //       {
-  //         path: "Projects", element: <Projects />, children: [
-  //           { path: "web", element: <WebProjects /> },
-  //           { path: "mobile", element: <MobileProjects /> },
-  //         ],
-
-  //       },
-  //       { path: "login", element: <Login /> },
-  //       { path: "register", element: <Register /> }
-  //     ]
-  //   },
-  //   {
-  //     path: "*",
-  //     element: <NotFound />
-  //   }
-  // ]);
-
-
-
-
 
 
   const router = createBrowserRouter([
     {
       path: "", element: <Layout />, children: [
-        { path: "", element: <Hero /> },
-        { path: "gallery", element: <Gallery /> },
-
-
+        { path: "", element: <Home /> },
         { path: "Products", element: <RoutingGuards><Products /></RoutingGuards> },
-
         { path: "Products/ProductDetails/:id", element: <RoutingGuards><ProductDetails /></RoutingGuards> },
-
-        {
-          path: "Categories", element: <Categories />, children: [
-            {
-              path: "clothes", element: <Clothes />, children: [
-                { path: "men", element: <Men /> },
-                { path: "women", element: <Women /> }
-              ],
-            },
-            {
-              path: "electronics", element: <Electronics />, children: [
-                { path: "mobile", element: <Mobile /> },
-                { path: "laptops", element: <Laptop /> },
-                { path: "SmartAccessories", element: <SmartAccessories /> }
-              ]
-            }
-          ]
-        },
+        { path: "cart", element: <RoutingGuards><Cart /></RoutingGuards> },
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> }
       ]
@@ -109,7 +38,9 @@ function App() {
   return (
     <>
       <UserContextProvider>
-        <RouterProvider router={router} ></RouterProvider>
+        <CartContextProvider>
+          <RouterProvider router={router} />
+        </CartContextProvider>
       </UserContextProvider>
     </>
   )

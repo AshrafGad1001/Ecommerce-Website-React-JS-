@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faStore, faRightFromBracket, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useContext } from "react"
+import { useState, useContext } from 'react';
 import { tokenContext } from './../../Context/userContext';
-
+import { cartContext } from './../../Context/cartContext';
 
 export function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const { setToken, token } = useContext(tokenContext);
+    const { cartCount } = useContext(cartContext);
 
     function handleLogout() {
         localStorage.removeItem("userToken");
@@ -40,25 +40,28 @@ export function Navbar() {
 
                 <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
 
-
                     <ul className="navbar-nav me-auto d-flex gap-3">
-                        {/* <li className="nav-item"><Link to="home" className="nav-link text-white">Home</Link></li> */}
-                        {/* <li className="nav-item"><Link to="about" className="nav-link text-white">About</Link></li> */}
-
-                        {/* <li className="nav-item"><Link to="services" className="nav-link text-white">Services</Link></li> */}
-                        {/* <li className="nav-item"><Link to="contact" className="nav-link text-white">Contact</Link></li> */}
-                        {/* <li className="nav-item"><Link to="Projects" className="nav-link text-white">Projects</Link></li> */}
                         {token ? (
                             <>
-                                <li className="nav-item"><Link to="gallery" className="nav-link text-white">Gallery</Link></li>
-                                <li className="nav-item"><Link to="Products" className="nav-link text-white">Products</Link></li>
-                                <li className="nav-item"><Link to="Categories" className="nav-link text-white">Categories</Link></li>
+                                <li className="nav-item">
+                                    <Link to="Products" className="nav-link text-white">Products</Link>
+                                </li>
+
                             </>
                         ) : null}
                     </ul>
 
-
-                    <div className="d-flex gap-2 mt-2 mt-lg-0">
+                    <div className="d-flex align-items-center gap-2 mt-2 mt-lg-0 ">
+                        <li className="nav-item me-5">
+                            <Link to="cart" className="nav-link text-white position-relative">
+                                <FontAwesomeIcon icon={faCartShopping} />
+                                {cartCount > 0 && (
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </Link>
+                        </li>
                         {token ? (
                             <button
                                 onClick={handleLogout}

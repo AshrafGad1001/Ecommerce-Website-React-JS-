@@ -8,17 +8,6 @@ import { useState } from 'react';
 
 export default function Register() {
 
-    // async function handelRegister(values) {
-    //     try {
-    //         const { data } = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',
-    //             values
-    //         );
-    //         console.log(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // }
 
 
 
@@ -67,43 +56,7 @@ export default function Register() {
         },
         validationSchema: UserSchema
         ,
-        // validate(values) {
-        //     let errors = {};
-
-        //     if (!values.name) {
-        //         errors.name = "Name is required";
-        //     }
-
-        //     if (!values.email) {
-        //         errors.email = "Email is required";
-        //     }
-
-        //     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-        //         errors.email = "Invalid email";
-        //     }
-
-        //     if (!values.phone) {
-        //         errors.phone = "Phone is required";
-        //     }
-
-        //     if (!/^01[0125][0-9]{8}$/.test(values.phone)) {
-        //         errors.phone = "Invalid phone number";
-        //     }
-
-        //     if (!values.password) {
-        //         errors.password = "Password is required";
-        //     }
-
-        //     if (values.password.length < 6) {
-        //         errors.password = "Password must be at least 6 chars";
-        //     }
-
-        //     if (values.rePassword !== values.password) {
-        //         errors.rePassword = "Passwords do not match";
-        //     }
-
-        //     return errors;
-        // },
+    
         onSubmit: handelRegister
     });
 
