@@ -19,17 +19,19 @@ export function Navbar() {
     }
 
     return (
-        <>
-            <nav
-                className="navbar navbar-expand-lg navbar-dark px-4"
-                style={{ background: "linear-gradient(135deg, #0a0a2e, #1a1a6e, #4a0080)" }}>
+        <nav
+            className="navbar navbar-expand-lg navbar-dark px-4 py-3"
+            style={{ background: "linear-gradient(135deg, #0a0a2e, #1a1a6e, #4a0080)" }}
+        >
+            <div className="container">
 
-                <div className="navbar-brand fw-bold fs-4" style={{ color: "#ffffff" }}>
-                    <Link to="/" className="text-decoration-none" style={{ color: "#ffffff" }}>
-                        <FontAwesomeIcon icon={faStore} className="ms-5 me-5" />
-                    </Link>
-                </div>
+                {/* Brand */}
+                <Link to="/" className="navbar-brand text-decoration-none d-flex align-items-center gap-2">
+                    <FontAwesomeIcon icon={faStore} style={{ color: "#a78bfa", fontSize: "22px" }} />
+                    <span className="fw-bold fs-5" style={{ color: "#ffffff" }}>ShopZone</span>
+                </Link>
 
+                {/* Toggler */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -40,48 +42,73 @@ export function Navbar() {
 
                 <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
 
-                    <ul className="navbar-nav me-auto d-flex gap-3">
-                        {token ? (
+                    {/* Left Links */}
+                    <ul className="navbar-nav me-auto d-flex gap-2 mt-2 mt-lg-0">
+                        {token && (
                             <>
                                 <li className="nav-item">
-                                    <Link to="Products" className="nav-link text-white">Products</Link>
+                                    <Link to="/" className="nav-link text-white"
+                                        style={{ transition: "color 0.2s" }}
+                                        onMouseEnter={e => e.target.style.color = "#a78bfa"}
+                                        onMouseLeave={e => e.target.style.color = "#fff"}>
+                                        Home
+                                    </Link>
                                 </li>
-
+                                <li className="nav-item">
+                                    <Link to="/Products" className="nav-link text-white"
+                                        style={{ transition: "color 0.2s" }}
+                                        onMouseEnter={e => e.target.style.color = "#a78bfa"}
+                                        onMouseLeave={e => e.target.style.color = "#fff"}>
+                                        Products
+                                    </Link>
+                                </li>
                             </>
-                        ) : null}
+                        )}
                     </ul>
 
-                    <div className="d-flex align-items-center gap-2 mt-2 mt-lg-0 ">
-                        <li className="nav-item me-5">
-                            <Link to="cart" className="nav-link text-white position-relative">
-                                <FontAwesomeIcon icon={faCartShopping} />
-                                {cartCount > 0 && (
-                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {cartCount}
-                                    </span>
-                                )}
-                            </Link>
-                        </li>
+                    {/* Right Side */}
+                    <div className="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+
+
+
                         {token ? (
-                            <button
-                                onClick={handleLogout}
-                                className="btn text-white"
-                                style={{ backgroundColor: "#DB1A1A", borderColor: "#1E3A8A" }}
-                            >
-                                <FontAwesomeIcon icon={faRightFromBracket} className="me-2" />
-                                Logout
-                            </button>
+                            <>
+                                {/* Cart */}
+                                <Link to="/cart" className="nav-link text-white position-relative px-1">
+                                    <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "18px" }} />
+                                    {cartCount > 0 && (
+                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                            style={{ fontSize: "10px" }}>
+                                            {cartCount}
+                                        </span>
+                                    )}
+                                </Link>
+
+                                {/* Logout */}
+                                <button
+                                    onClick={handleLogout}
+                                    className="btn btn-sm text-white px-3"
+                                    style={{ backgroundColor: "#DB1A1A", border: "none", borderRadius: "8px" }}
+                                >
+                                    <FontAwesomeIcon icon={faRightFromBracket} className="me-2" />
+                                    Logout
+                                </button>
+                            </>
                         ) : (
                             <>
-                                <Link to="/login" className="btn btn-outline-light">Login</Link>
-                                <Link to="/register" className="btn" style={{ background: "#7c3aed", color: "#fff" }}>Register</Link>
+                                <Link to="/login" className="btn btn-sm btn-outline-light px-3">
+                                    Login
+                                </Link>
+                                <Link to="/register" className="btn btn-sm px-3"
+                                    style={{ background: "#7c3aed", color: "#fff", border: "none", borderRadius: "8px" }}>
+                                    Register
+                                </Link>
                             </>
                         )}
                     </div>
 
                 </div>
-
-            </nav>
-        </>
-    )
+            </div>
+        </nav>
+    );
 }
